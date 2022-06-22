@@ -104,7 +104,7 @@ def find_before(month, day, spots):
 
 
 if __name__ == "__main__":
-  found = find_before(7, 2, spots)
+  found = find_before(int(os.environ['check_month']), int(os.environ['check_day']), spots)
   print(found)
   if found:
     message = '\n'.join(found)
