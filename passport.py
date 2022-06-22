@@ -1,4 +1,13 @@
+from dotenv import load_dotenv
 import requests
+import os
+from twilio.rest import Client
+
+load_dotenv()
+account_sid = os.environ['TWILIO_ACCOUNT_SID']
+auth_token = os.environ['TWILIO_AUTH_TOKEN']
+client = Client(account_sid, auth_token)
+
 
 headers = {
   'authority': 'tools.usps.com',
@@ -93,4 +102,14 @@ def find_before(month, day, spots):
 
   return out
 
-print(* find_before(7, 10, spots), sep='\n')
+
+if __name__ == "__main__":
+  found = find_before(7, 2, spots)
+  print(found)
+  if found:
+    message = '\n'.join(found)
+    client.messages.create(
+       body=message,
+       from_=os.environ['TWILIO_FROM_NUMBER'],
+       to='+13475591493'
+    )
